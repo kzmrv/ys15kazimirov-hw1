@@ -1,15 +1,20 @@
 package ua.yandex.shad.tempseries;
 
 public class TempSummaryStatistics {
-	public final double avgTemp;
-	public final double devTemp;
-	public final double minTemp;
-	public final double maxTemp;
-	public TempSummaryStatistics(double _avgTemp, double _devTemp, double _minTemp, double _maxTemp){
-		avgTemp = _avgTemp;
-		devTemp = _devTemp;
-		minTemp = _minTemp;
-		maxTemp = _maxTemp;
+	private final double avgTemp;
+	private final double devTemp;
+	private final double minTemp;
+	private final double maxTemp;
+	public TempSummaryStatistics(double inAvgTemp, double inDevTemp, 
+			double inMinTemp, double inMaxTemp) {
+		avgTemp = inAvgTemp;
+		devTemp = inDevTemp;
+		minTemp = inMinTemp;
+		maxTemp = inMaxTemp;
+	}
+	
+	public double getAvgTemp() {
+		return avgTemp;
 	}
 	
 }
