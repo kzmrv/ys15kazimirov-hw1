@@ -192,9 +192,8 @@ public class TemperatureSeriesAnalysisTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testFindTempsGreaterThan_failOnEmpty(){
-    	double[] temperatureSeries = {};
     	TemperatureSeriesAnalysis seriesAnalysis = 
-    			new TemperatureSeriesAnalysis(temperatureSeries);
+    			new TemperatureSeriesAnalysis();
     	double[] actualResult = seriesAnalysis.findTempsGreaterThan(1.0);
     }
     
