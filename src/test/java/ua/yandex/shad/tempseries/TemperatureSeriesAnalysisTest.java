@@ -220,18 +220,24 @@ public class TemperatureSeriesAnalysisTest {
     }
     
     @Test
-    public void testSummaryStatistics_testAverageValue(){
+    public void testSummaryStatistics_testValues() {
     	double[] temperatureSeries = {1.0, -10.0, -1.0, 5.0, 60};
     	TemperatureSeriesAnalysis seriesAnalysis = 
     			new TemperatureSeriesAnalysis(temperatureSeries);
     	TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();
-    	double expResult = 11.0;
-    	double actualResult = statistics.getAvgTemp();
-    	assertEquals(expResult, actualResult, 0.0001);
+    	double expDev = Math.sqrt(624.4);
+    	double[] expResult = {11.0, expDev, -10.0, 60.0};
+    	double actualAvg = statistics.getAvgTemp();
+    	double actualDev = statistics.getDevTemp();
+    	double actualMin = statistics.getMinTemp();
+    	double actualMax = statistics.getMaxTemp();
+    	double[] actualResult = {actualAvg, actualDev, actualMin, actualMax};
+    	assertArrayEquals(expResult, actualResult, 0.0001);
+    	
     }
     
     @Test(expected=InputMismatchException.class)
-    public void testAddTemps_testOnLessThanAbsoluteMin(){
+    public void testAddTemps_testOnLessThanAbsoluteMin() {
     	double[] temperatureSeries = {};
     	double[] newTempSeries = {4.2,5.0, -273.0, -274.0};
     	TemperatureSeriesAnalysis seriesAnalysis = 
