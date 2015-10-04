@@ -63,8 +63,9 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double findTempClosestToZero(){
-    	if(arrayLength == 0)
+    	if(arrayLength == 0){
     		throw new IllegalArgumentException();
+    	}
     	double minModule = Math.abs(values[0]);
     	double result = values[0];
         for(int i=1;i<arrayLength;i++){
@@ -81,8 +82,9 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double findTempClosestToValue(double tempValue){
-    	if(arrayLength == 0)
+    	if(arrayLength == 0){
     		throw new IllegalArgumentException();
+    	}
     	double minModule = Math.abs(values[0]-tempValue);
     	double result = values[0];
         for(int i=1;i<arrayLength;i++){
@@ -99,8 +101,9 @@ public class TemperatureSeriesAnalysis {
     }
     
     public double[] findTempsLessThan(double tempValue){
-    	if(arrayLength == 0)
+    	if(arrayLength == 0){
     		throw new IllegalArgumentException();
+    	}
     	double[] temporary = new double[arrayLength];
     	int count=0;
     	for(int i=0;i<arrayLength;i++){
@@ -110,16 +113,16 @@ public class TemperatureSeriesAnalysis {
     		}
     	}
     	double[] result = new double[count]; 
-    	for(int i=0;i<count;i++)
-    	{
+    	for(int i=0;i<count;i++){
     		result[i] = temporary[i];
     	}    		
         return result;
     }
     
     public double[] findTempsGreaterThan(double tempValue){
-    	if(arrayLength == 0)
+    	if(arrayLength == 0){
     		throw new IllegalArgumentException();
+    	}
     	double[] temporary = new double[arrayLength];
     	int count=0;
     	for(int i=0;i<arrayLength;i++){
@@ -129,8 +132,7 @@ public class TemperatureSeriesAnalysis {
     		}
     	}
     	double[] result = new double[count]; 
-    	for(int i=0;i<count;i++)
-    	{
+    	for(int i=0;i<count;i++){
     		result[i] = temporary[i];
     	}    		
         return result;
@@ -146,15 +148,13 @@ public class TemperatureSeriesAnalysis {
     			throw new InputMismatchException();
     		}
     	}
-    	System.out.println("Arr" + arrayLength);
-    	System.out.println("Len" + temps.length);
     	int expectedLength = values.length;
-    	System.out.println("ExpLen" + expectedLength);
-    	if(expectedLength == 0)
+    	if(expectedLength == 0){
     		expectedLength = temps.length;
-    	while(temps.length+arrayLength>expectedLength)
+    	}
+    	while(temps.length+arrayLength>expectedLength){
     		expectedLength*=2;
-    	System.out.println("ExpLen" + expectedLength);
+    	}
     	double[] result = new double [expectedLength];
     	for(int i=0;i<arrayLength;i++){
     		result[i] = values[i];
