@@ -5,12 +5,10 @@ public class TemperatureSeriesAnalysis {
 	public static final double EPSILON = 0.00001;
 	private double[] values;
 	private int arrayLength;
-	
     public TemperatureSeriesAnalysis() {
     	values = new double[0];
     	arrayLength = 0;
     }
-    
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
     	arrayLength = temperatureSeries.length;
         this.values = new double [arrayLength];
@@ -18,17 +16,17 @@ public class TemperatureSeriesAnalysis {
         	values[i] = temperatureSeries[i];
         }
     }
-    
+
     public double[] getValues() {
     	double[] result = new double[values.length];
-    	for(int i = 0; i < values.length; i++) {
+    	for (int i = 0; i < values.length; i++) {
     		result[i] = values[i];
     	}
     	return result;
     }
-    
-    
-    
+
+
+
     public double average() {
     	if (arrayLength == 0) {
     		throw new IllegalArgumentException();
@@ -38,18 +36,18 @@ public class TemperatureSeriesAnalysis {
     		sum += values[i];
     	}
     	return sum/arrayLength;
-    }    
-    
+    }
+
     public double deviation() {
     	double average = this.average();
     	double sum = 0;
     	for (int i = 0; i < arrayLength; i++) {
     		sum += (values[i] - average) * (values[i] - average);
     	}
-    	sum /= arrayLength; 
+    	sum /= arrayLength;
     	return Math.sqrt(sum);
     }
-    
+
     public double min() {
         if (arrayLength == 0) {
         	throw new IllegalArgumentException();
@@ -62,7 +60,6 @@ public class TemperatureSeriesAnalysis {
         }
         return minTemp;
     }
-     
     public double max() {
     	if (arrayLength == 0) {
         	throw new IllegalArgumentException();
@@ -75,7 +72,6 @@ public class TemperatureSeriesAnalysis {
         }
         return maxTemp;
     }
-    
     public double findTempClosestToZero() {
     	if (arrayLength == 0) {
     		throw new IllegalArgumentException();
@@ -88,33 +84,32 @@ public class TemperatureSeriesAnalysis {
         		minModule = Math.abs(element);
         		resultValue = element;
         	}
-        	if (Math.abs(element) - minModule < EPSILON && resultValue < 0) {
+        	if (Math.abs(element) - minModule < 
+        			EPSILON && resultValue < 0) {
         		resultValue = element;
         	}
         }
         return resultValue;
     }
-    
     public double findTempClosestToValue(double tempValue) {
     	if (arrayLength == 0) {
     		throw new IllegalArgumentException();
     	}
     	double minModule = Math.abs(values[0]-tempValue);
     	double result = values[0];
-        for (int i = 1; i < arrayLength; i++) {
-        	double element = values[i];
-        	if (Math.abs(element-tempValue) < minModule) {
-        		minModule = Math.abs(element - tempValue);
-        		result = element;
+        for (int j = 1; j < arrayLength; j++) {
+        	double value = values[j];
+        	if (Math.abs(value-tempValue) < minModule) {
+        		minModule = Math.abs(value - tempValue);
+        		result = value;
         	}
-        	if (Math.abs(element - tempValue) - minModule < EPSILON
+        	if (Math.abs(value - tempValue) - minModule < EPSILON
         			&& result < 0) {
-        		result = element;
+        		result = value;
         	}
         }
         return result;
     }
-    
     public double[] findTempsLessThan(double tempValue) {
     	if (arrayLength == 0) {
     		throw new IllegalArgumentException();
@@ -124,16 +119,15 @@ public class TemperatureSeriesAnalysis {
     	for (int i = 0; i < arrayLength; i++) {
     		if (values[i] < tempValue) {
     			temp[count] = values[i];
-    			count++;    			
+    			count++;
     		}
     	}
-    	double[] result = new double[count]; 
+    	double[] result = new double[count];
     	for (int i = 0; i < count; i++) {
     		result[i] = temp[i];
-    	}    		
+    	}
         return result;
     }
-    
     public double[] findTempsGreaterThan(double tempValue) {
     	if (arrayLength == 0) {
     		throw new IllegalArgumentException();
@@ -143,20 +137,18 @@ public class TemperatureSeriesAnalysis {
     	for (int i = 0; i < arrayLength; i++) {
     		if (values[i] >= tempValue) {
     			temp[counter] = values[i];
-    			counter++;    			
+    			counter++;
     		}
     	}
-    	double[] result = new double[counter]; 
+    	double[] result = new double[counter];
     	for (int i = 0; i < counter; i++) {
     		result[i] = temp[i];
-    	}    		
+    	}
         return result;
     }
-    
     public TempSummaryStatistics summaryStatistics() {
         return new TempSummaryStatistics(average(), deviation(), min(), max());
     }
-    
     public int addTemps(double ... temps) {
     	for (int i = 0; i < temps.length; i++) {
     		if (temps[i] < ABSOLUTE_MINIMUM) {
